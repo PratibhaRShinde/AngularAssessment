@@ -1,0 +1,58 @@
+<div class="container mt-3">
+    <h4 style="color: blue;">Angular Assessment</h4>
+    <button style="float: right;" type="button" class="btn btn-primary" (click)="openPopup()">Add
+    </button>
+</div>
+<br>
+<br>
+
+<div class="container mt-3">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name of the Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let role of roles;">
+                <td>{{role.name}}</td>
+                <td><button class="btn btn-primary"  (click)="updatePopup(role.id)">Edit</button>&nbsp;
+                    <button class="btn btn-danger" (click)="deletePopup(role.id)">Delete</button>
+                </td>
+        </tbody>
+    </table>
+
+
+    <ul class="pagination justify-content-end pagination-lg" style="margin: 20px 0;">
+        <li class="page-item"><a href="#" class="page-link">
+                <</a></li>
+        <li class="page-item"><a href="#" class="page-link">1</a></li>
+        <li class="page-item"><a href="#" class="page-link">></a></li>
+    </ul>
+</div>
+
+
+
+<!------Modal Popup for Add-->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 *ngIf="formData.controls.id.value ==0"  class="modal-title">Add New Role</h4>
+                <h4 *ngIf="formData.controls.id.value != 0" class="modal-title">Update Role</h4>
+            </div><br>
+            <form [formGroup]="formData" (ngSubmit)="save(formData.value)">
+            <div class="modal-body">
+                <input type="text" class="form-control" formControlName="name" placeholder="Name of the Role">
+        <br>
+        <button type="button" class="btn btn-danger" (click)="closePopup()">Close</button>
+                <button [disabled]="!formData.valid" type="submit" class="btn btn-primary"
+                style="float: right;">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+
+
